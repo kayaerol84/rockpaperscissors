@@ -1,7 +1,8 @@
-package com.shaban.games.rockpaperscissors.domain;
+package com.shaban.games.rockpaperscissors.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
@@ -14,12 +15,14 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@Deprecated
 @RunWith(MockitoJUnitRunner.class)
-public class ScannerUtilTest {
+public class ScannerHelperServiceTest {
+
+    @InjectMocks
+    private ScannerHelperService scannerHelperService;
 
     @Test
-    public void getNextInt_shouldReturnIntInput_whenNumericValueEntered(){
+    public void getNextIntUntilNumberEnteredUntilNumberEntered_shouldReturnIntInput_whenNumericValueEntered(){
 
         String data = "3";
         InputStream stdin = System.in;
@@ -27,14 +30,14 @@ public class ScannerUtilTest {
 
         Scanner scanner = new Scanner(System.in);
 
-        int nextInt = ScannerUtil.getNextInt(scanner, "no need to ask again");
+        int nextInt = scannerHelperService.getNextIntUntilNumberEntered(scanner, "no need to ask again");
         System.setIn(stdin);
 
         assertEquals(3, nextInt);
     }
 
     @Test
-    public void getNextInt_shouldKeepTryToGetInteger_untilNumericValueEntered(){
+    public void getNextIntUntilNumberEntered_shouldKeepTryToGetInteger_untilNumericValueEntered(){
 
         Scanner mockScanner = mock(Scanner.class);
         when(mockScanner.hasNextInt()).thenAnswer(new Answer<Boolean>() {
@@ -50,7 +53,7 @@ public class ScannerUtilTest {
         when(mockScanner.next()).thenReturn("3");
         when(mockScanner.nextInt()).thenReturn(3);
 
-        int nextInt = ScannerUtil.getNextInt(mockScanner, "ask number again");
+        int nextInt = scannerHelperService.getNextIntUntilNumberEntered(mockScanner, "ask number again");
 
         assertEquals(3, nextInt);
     }

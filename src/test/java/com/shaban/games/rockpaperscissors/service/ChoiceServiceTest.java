@@ -1,14 +1,12 @@
 package com.shaban.games.rockpaperscissors.service;
 
 import com.shaban.games.rockpaperscissors.domain.Choice;
-import com.shaban.games.rockpaperscissors.domain.Computer;
-import com.shaban.games.rockpaperscissors.domain.Person;
-import com.shaban.games.rockpaperscissors.domain.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
@@ -20,6 +18,7 @@ import static com.shaban.games.rockpaperscissors.domain.Choice.PAPER;
 import static com.shaban.games.rockpaperscissors.domain.Choice.ROCK;
 import static com.shaban.games.rockpaperscissors.domain.Choice.SCISSORS;
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +28,8 @@ public class ChoiceServiceTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
+    @Mock
+    private ScannerHelperService scannerHelperService;
 
     @InjectMocks
     private ChoiceService choiceService;
@@ -110,8 +111,7 @@ public class ChoiceServiceTest {
     public void getChoice_shouldReturnROCK_when0Entered(){
 
         Scanner scanner = mock(Scanner.class);
-        when(scanner.hasNextInt()).thenReturn(true);
-        when(scanner.nextInt()).thenReturn(ROCK.getCode());
+        when(scannerHelperService.getNextIntUntilNumberEntered(any(), any())).thenReturn(ROCK.getCode());
 
         Optional<Choice> choice = choiceService.getPersonChoice(scanner);
         assertTrue(choice.isPresent());
@@ -122,9 +122,8 @@ public class ChoiceServiceTest {
     public void getChoice_shouldReturnPAPER_when1Entered(){
 
         Scanner scanner = mock(Scanner.class);
-        when(scanner.hasNextInt()).thenReturn(true);
-        when(scanner.nextInt()).thenReturn(PAPER.getCode());
 
+        when(scannerHelperService.getNextIntUntilNumberEntered(any(), any())).thenReturn(PAPER.getCode());
         Optional<Choice> choice = choiceService.getPersonChoice(scanner);
         assertTrue(choice.isPresent());
         assertEquals(PAPER, choice.get());
@@ -134,8 +133,7 @@ public class ChoiceServiceTest {
     public void getChoice_shouldReturnSCISSORS_when2Entered(){
 
         Scanner scanner = mock(Scanner.class);
-        when(scanner.hasNextInt()).thenReturn(true);
-        when(scanner.nextInt()).thenReturn(SCISSORS.getCode());
+        when(scannerHelperService.getNextIntUntilNumberEntered(any(), any())).thenReturn(SCISSORS.getCode());
 
         Optional<Choice> choice = choiceService.getPersonChoice(scanner);
         assertTrue(choice.isPresent());
@@ -146,8 +144,7 @@ public class ChoiceServiceTest {
     public void getChoice_shouldReturnEmpty_when3Entered(){
 
         Scanner scanner = mock(Scanner.class);
-        when(scanner.hasNextInt()).thenReturn(true);
-        when(scanner.nextInt()).thenReturn(3);
+        when(scannerHelperService.getNextIntUntilNumberEntered(any(), any())).thenReturn(3);
 
         Optional<Choice> choice = choiceService.getPersonChoice(scanner);
         assertFalse(choice.isPresent());

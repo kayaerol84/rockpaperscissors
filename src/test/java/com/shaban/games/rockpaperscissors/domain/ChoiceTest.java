@@ -1,11 +1,14 @@
 package com.shaban.games.rockpaperscissors.domain;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ChoiceTest {
 
     @Test

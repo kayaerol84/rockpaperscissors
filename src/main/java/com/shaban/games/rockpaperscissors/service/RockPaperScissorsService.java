@@ -13,7 +13,7 @@ public class RockPaperScissorsService {
     @Autowired
     private ChoiceService choiceService;
 
-    public void playRockPaperScissors(Scanner scanner){
+    public void playGame(Scanner scanner){
 
         final Optional<Choice> personChoice = choiceService.getPersonChoice(scanner);
 

@@ -43,43 +43,43 @@ public class RockPaperScissorsServiceTest {
     private RockPaperScissorsService rockPaperScissorsService;
 
     @Test
-    public void playRockPaperScissors_personShouldBeatComputer_whenROCKtoSCISSORS(){
+    public void playGame_personShouldBeatComputer_whenROCKtoSCISSORS(){
 
         when(choiceService.getPersonChoice(any())).thenReturn(Optional.of(ROCK));
         when(choiceService.getComputerChoice()).thenReturn(SCISSORS);
 
-        rockPaperScissorsService.playRockPaperScissors(scanner);
+        rockPaperScissorsService.playGame(scanner);
 
         verify(choiceService, times(1)).decideWhoWins(ROCK, SCISSORS);
     }
 
     @Test
-    public void playRockPaperScissors_personShouldBeatComputer_whenSCISSORStoPAPER(){
+    public void playGame_personShouldBeatComputer_whenSCISSORStoPAPER(){
 
         when(choiceService.getPersonChoice(any())).thenReturn(Optional.of(SCISSORS));
         when(choiceService.getComputerChoice()).thenReturn(PAPER);
 
-        rockPaperScissorsService.playRockPaperScissors(scanner);
+        rockPaperScissorsService.playGame(scanner);
 
         verify(choiceService, times(1)).decideWhoWins( SCISSORS, PAPER);
     }
 
     @Test
-    public void playRockPaperScissors_personShouldBeatComputer_whenPAPERtoROCK(){
+    public void playGame_personShouldBeatComputer_whenPAPERtoROCK(){
 
         when(choiceService.getPersonChoice(any())).thenReturn(Optional.of(PAPER));
         when(choiceService.getComputerChoice()).thenReturn(ROCK);
 
-        rockPaperScissorsService.playRockPaperScissors(scanner);
+        rockPaperScissorsService.playGame(scanner);
 
         verify(choiceService, times(1)).decideWhoWins( PAPER, ROCK);
     }
 
     @Test
-    public void playRockPaperScissors_shouldPrintMessageAgain_whenPersonChoiceIsInvalid() {
+    public void playGame_shouldPrintMessageAgain_whenPersonChoiceIsInvalid() {
         when(choiceService.getPersonChoice(any())).thenReturn(Optional.empty());
 
-        rockPaperScissorsService.playRockPaperScissors(scanner);
+        rockPaperScissorsService.playGame(scanner);
 
         verify(choiceService, times(0)).decideWhoWins( any(), any());
 

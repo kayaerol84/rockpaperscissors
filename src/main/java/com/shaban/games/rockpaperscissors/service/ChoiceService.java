@@ -1,16 +1,18 @@
 package com.shaban.games.rockpaperscissors.service;
 
 import com.shaban.games.rockpaperscissors.domain.Choice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
 
-import static com.shaban.games.rockpaperscissors.domain.ScannerUtil.getNextInt;
-
 @Service
 class ChoiceService {
+
+    @Autowired
+    private ScannerHelperService scannerHelperService;
 
     void decideWhoWins(final Choice yourChoice, final Choice computerChoice) {
         if (yourChoice == computerChoice) {
@@ -32,7 +34,8 @@ class ChoiceService {
 
     public Optional<Choice> getPersonChoice(Scanner in) {
         System.out.print("Choose your weapon Rock(0),Paper(1),Scissors(2) ; ");
-        final int intChoice = getNextInt(in, "Please enter one of these numbers. Choose your weapon Rock(0),Paper(1),Scissors(2) ; ");
+        final int intChoice = scannerHelperService.getNextIntUntilNumberEntered(
+                in, "Please enter one of these numbers. Choose your weapon Rock(0),Paper(1),Scissors(2) ; ");
         final Optional<Choice> yourChoice = Choice.get(intChoice);
 
         return yourChoice;
