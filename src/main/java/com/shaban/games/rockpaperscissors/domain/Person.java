@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import static com.shaban.games.rockpaperscissors.domain.ScannerUtil.getNextInt;
 
+@Deprecated
 public class Person implements Player {
     @Override
     public Optional<Choice> getChoice(Scanner in) {

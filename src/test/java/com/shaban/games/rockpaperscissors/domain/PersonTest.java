@@ -14,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@Deprecated
 public class PersonTest {
     @Test
     public void getChoice_shouldReturnROCK_when0Entered(){

@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
+@Deprecated
 public class ComputerTest {
 
     @Test
