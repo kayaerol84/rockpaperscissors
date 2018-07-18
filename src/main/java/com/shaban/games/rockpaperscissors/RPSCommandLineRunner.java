@@ -25,6 +25,7 @@ public class RPSCommandLineRunner implements CommandLineRunner {
         System.out.print("How many times do you want to play this game? ");
         final int nTimes = getNextInt(scanner, "Please enter a number. How many times do you want to play this game? ");
 
+        System.out.println("nTimes; " + nTimes);
         IntStream.rangeClosed(1, nTimes)
                 .forEach(e -> gameService.playRockPaperScissors(scanner) );
 

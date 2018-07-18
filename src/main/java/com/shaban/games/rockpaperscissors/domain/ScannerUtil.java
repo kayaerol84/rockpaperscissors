@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class ScannerUtil {
 
-    public static int getNextInt(Scanner scanner, String input) {
+    public static int getNextInt(Scanner scanner, String askIfAlphaEntered) {
         while (!scanner.hasNextInt()){
-            System.out.print(input);
+            System.out.print(askIfAlphaEntered);
             scanner.next();
         }
         return scanner.nextInt();
