@@ -1,11 +1,14 @@
 package com.shaban.games.rockpaperscissors.service;
 
 import com.shaban.games.rockpaperscissors.domain.Choice;
+import com.shaban.games.rockpaperscissors.domain.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Scanner;
+
+import static com.shaban.games.rockpaperscissors.domain.Result.INVALID;
 
 @Service
 public class RockPaperScissorsService {
@@ -13,7 +16,12 @@ public class RockPaperScissorsService {
     @Autowired
     private ChoiceService choiceService;
 
-    public void playGame(Scanner scanner){
+    /**
+     * returns the result of a single game and prints out who won
+     * @param scanner
+     * @return
+     */
+    public Result playGame(Scanner scanner){
 
         final Optional<Choice> personChoice = choiceService.getPersonChoice(scanner);
 
@@ -21,9 +29,9 @@ public class RockPaperScissorsService {
             System.out.println("Your choice is " + personChoice.get());
             final Choice computerChoice = choiceService.getComputerChoice();
 
-            choiceService.decideWhoWins(personChoice.get(), computerChoice);
+            return choiceService.decideWhoWins(personChoice.get(), computerChoice);
         } else  {
-            System.out.print("Please enter one of these numbers. ");
+            return INVALID;
         }
     }
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public enum Choice {
 
-    ROCK(0){
+    ROCK("0"){
 
         @Override
         public boolean beats(final Choice other){
@@ -16,7 +16,7 @@ public enum Choice {
 
         }
     },
-    PAPER(1){
+    PAPER("1"){
 
         @Override
         public boolean beats(final Choice other){
@@ -24,7 +24,7 @@ public enum Choice {
 
         }
     },
-    SCISSORS (2) {
+    SCISSORS ("2") {
 
         @Override
         public boolean beats(final Choice other){
@@ -33,26 +33,26 @@ public enum Choice {
         }
     };
 
-    private static final Map<Integer, Choice> lookup = new HashMap<>();
+    private static final Map<String, Choice> lookup = new HashMap<>();
 
     static {
         Arrays.stream(Choice.values())
                 .forEach(choice -> lookup.put(choice.getCode(), choice));
     }
 
-    protected int code;
+    protected String code;
 
-    Choice(final int code) {
+    Choice(final String code) {
         this.code = code;
     }
 
     public abstract boolean beats(Choice other);
 
-    public static Optional<Choice> get(final Integer code) {
+    public static Optional<Choice> get(final String code) {
         return Optional.ofNullable(lookup.get(code));
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 }

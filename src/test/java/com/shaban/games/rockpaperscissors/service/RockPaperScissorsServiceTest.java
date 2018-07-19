@@ -1,5 +1,7 @@
 package com.shaban.games.rockpaperscissors.service;
 
+import com.shaban.games.rockpaperscissors.domain.Choice;
+import com.shaban.games.rockpaperscissors.domain.Result;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +18,9 @@ import java.util.Scanner;
 import static com.shaban.games.rockpaperscissors.domain.Choice.PAPER;
 import static com.shaban.games.rockpaperscissors.domain.Choice.ROCK;
 import static com.shaban.games.rockpaperscissors.domain.Choice.SCISSORS;
+import static com.shaban.games.rockpaperscissors.domain.Result.COMPUTER_WON;
+import static com.shaban.games.rockpaperscissors.domain.Result.INVALID;
+import static com.shaban.games.rockpaperscissors.domain.Result.PERSON_WON;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -48,10 +53,9 @@ public class RockPaperScissorsServiceTest {
         when(choiceService.getPersonChoice(any())).thenReturn(Optional.of(ROCK));
         when(choiceService.getComputerChoice()).thenReturn(SCISSORS);
 
-        rockPaperScissorsService.playGame(scanner);
-
-        verify(choiceService, times(1)).decideWhoWins(ROCK, SCISSORS);
+        personShouldWon(ROCK, SCISSORS);
     }
+
 
     @Test
     public void playGame_personShouldBeatComputer_whenSCISSORStoPAPER(){
@@ -59,9 +63,7 @@ public class RockPaperScissorsServiceTest {
         when(choiceService.getPersonChoice(any())).thenReturn(Optional.of(SCISSORS));
         when(choiceService.getComputerChoice()).thenReturn(PAPER);
 
-        rockPaperScissorsService.playGame(scanner);
-
-        verify(choiceService, times(1)).decideWhoWins( SCISSORS, PAPER);
+        personShouldWon(SCISSORS, PAPER);
     }
 
     @Test
@@ -70,19 +72,39 @@ public class RockPaperScissorsServiceTest {
         when(choiceService.getPersonChoice(any())).thenReturn(Optional.of(PAPER));
         when(choiceService.getComputerChoice()).thenReturn(ROCK);
 
-        rockPaperScissorsService.playGame(scanner);
+        personShouldWon(PAPER, ROCK);
+    }
 
-        verify(choiceService, times(1)).decideWhoWins( PAPER, ROCK);
+    @Test
+    public void playGame_computerShouldBeatPerson_whenROCKtoPAPER(){
+
+        when(choiceService.getPersonChoice(any())).thenReturn(Optional.of(ROCK));
+        when(choiceService.getComputerChoice()).thenReturn(PAPER);
+
+        computerShouldWon(ROCK, PAPER);
     }
 
     @Test
     public void playGame_shouldPrintMessageAgain_whenPersonChoiceIsInvalid() {
         when(choiceService.getPersonChoice(any())).thenReturn(Optional.empty());
 
-        rockPaperScissorsService.playGame(scanner);
+        Result result = rockPaperScissorsService.playGame(scanner);
 
         verify(choiceService, times(0)).decideWhoWins( any(), any());
 
-        assertEquals("Please enter one of these numbers. ", outContent.toString());
+        assertEquals(INVALID, result);
     }
+
+    private void personShouldWon(Choice personChoice, Choice computerChoice) {
+        when(choiceService.decideWhoWins(personChoice, computerChoice)).thenReturn(PERSON_WON);
+        Result result = rockPaperScissorsService.playGame(scanner);
+        assertEquals(PERSON_WON, result);
+    }
+
+    private void computerShouldWon(Choice personChoice, Choice computerChoice) {
+        when(choiceService.decideWhoWins(personChoice, computerChoice)).thenReturn(COMPUTER_WON);
+        Result result = rockPaperScissorsService.playGame(scanner);
+        assertEquals(COMPUTER_WON, result);
+    }
+
 }

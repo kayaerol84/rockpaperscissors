@@ -57,4 +57,11 @@ public class ScannerHelperServiceTest {
 
         assertEquals(3, nextInt);
     }
+
+    @Test
+    public void getNext_returnsString(){
+        Scanner mockScanner = mock(Scanner.class);
+        when(mockScanner.next()).thenReturn("input");
+        assertEquals("input", scannerHelperService.getNext(mockScanner));
+    }
 }
