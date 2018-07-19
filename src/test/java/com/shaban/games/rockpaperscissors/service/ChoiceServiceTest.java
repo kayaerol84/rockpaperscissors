@@ -49,7 +49,7 @@ public class ChoiceServiceTest {
 
         choiceService.decideWhoWins(Choice.PAPER, Choice.PAPER);
 
-        assertEquals("Nobody wins, try again!\n", outContent.toString());
+        assertEquals("\033[33;1;2m Nobody wins!\033[0m\n", outContent.toString());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ChoiceServiceTest {
 
         choiceService.decideWhoWins(Choice.SCISSORS, Choice.PAPER);
 
-        assertEquals("You won\n", outContent.toString());
+        assertEquals("\033[32;1;2m You won\033[0m\n", outContent.toString());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ChoiceServiceTest {
 
         choiceService.decideWhoWins(Choice.PAPER, Choice.ROCK);
 
-        assertEquals("You won\n", outContent.toString());
+        assertEquals("\033[32;1;2m You won\033[0m\n", outContent.toString());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ChoiceServiceTest {
 
         choiceService.decideWhoWins(Choice.ROCK, Choice.SCISSORS);
 
-        assertEquals("You won\n", outContent.toString());
+        assertEquals("\033[32;1;2m You won\033[0m\n", outContent.toString());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class ChoiceServiceTest {
 
         choiceService.decideWhoWins(Choice.SCISSORS, Choice.ROCK);
 
-        assertEquals("Computer won\n", outContent.toString());
+        assertEquals("\033[31;1m Computer won\033[0m\n", outContent.toString());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class ChoiceServiceTest {
 
         choiceService.decideWhoWins(Choice.ROCK, Choice.PAPER);
 
-        assertEquals("Computer won\n", outContent.toString());
+        assertEquals("\033[31;1m Computer won\033[0m\n", outContent.toString());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class ChoiceServiceTest {
 
         choiceService.decideWhoWins(Choice.PAPER, Choice.SCISSORS);
 
-        assertEquals("Computer won\n", outContent.toString());
+        assertEquals("\033[31;1m Computer won\033[0m\n", outContent.toString());
     }
 
     @Test

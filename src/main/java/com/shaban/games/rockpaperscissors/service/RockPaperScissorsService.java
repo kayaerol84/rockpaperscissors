@@ -18,7 +18,7 @@ public class RockPaperScissorsService {
         final Optional<Choice> personChoice = choiceService.getPersonChoice(scanner);
 
         if(personChoice.isPresent()) {
-            System.out.println("Your choice is " + personChoice);
+            System.out.println("Your choice is " + personChoice.get());
             final Choice computerChoice = choiceService.getComputerChoice();
 
             choiceService.decideWhoWins(personChoice.get(), computerChoice);
