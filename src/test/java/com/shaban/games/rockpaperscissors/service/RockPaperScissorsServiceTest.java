@@ -27,9 +27,6 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class RockPaperScissorsServiceTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-
     @Mock
     private ChoiceService choiceService;
     private Scanner scanner;
@@ -37,11 +34,6 @@ public class RockPaperScissorsServiceTest {
     @Before
     public void setup(){
         scanner = mock(Scanner.class);
-        System.setOut(new PrintStream(outContent));
-    }
-    @After
-    public void restore() {
-        System.setOut(originalOut);
     }
 
     @InjectMocks
@@ -85,7 +77,7 @@ public class RockPaperScissorsServiceTest {
     }
 
     @Test
-    public void playGame_shouldPrintMessageAgain_whenPersonChoiceIsInvalid() {
+    public void playGame_shouldReturnInvalid_whenPersonChoiceIsInvalid() {
         when(choiceService.getPersonChoice(any())).thenReturn(Optional.empty());
 
         Result result = rockPaperScissorsService.playGame(scanner);
