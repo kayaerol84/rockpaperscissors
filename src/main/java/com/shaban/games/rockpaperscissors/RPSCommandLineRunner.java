@@ -32,8 +32,8 @@ public class RPSCommandLineRunner implements CommandLineRunner {
         IntStream.rangeClosed(1, nTimes)
                 .forEach(e -> rockPaperScissorsService.playGame(scanner) );
 
+        // This is a blue output
         System.out.println("\n\033[34;1;2m Bye bye!!!\033[0m");
-
     }
 
 }

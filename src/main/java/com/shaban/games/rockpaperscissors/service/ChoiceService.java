@@ -15,6 +15,7 @@ class ChoiceService {
     private ScannerHelperService scannerHelperService;
 
     void decideWhoWins(final Choice yourChoice, final Choice computerChoice) {
+        // Outputs colored. Equal as yellow, computer wins as red & person wins as green
         if (yourChoice == computerChoice) {
             System.out.println("\033[33;1;2m Nobody wins!\033[0m");
         } else {
@@ -28,6 +29,8 @@ class ChoiceService {
 
         Optional<Choice> computerChoice = Choice.get(new Random().nextInt(3));
         System.out.println("Computer's choice is "+ computerChoice.get());
+
+        // This optional will always be present
         return computerChoice.get();
     }
 
@@ -36,8 +39,8 @@ class ChoiceService {
         System.out.print("Choose your weapon Rock(0),Paper(1),Scissors(2) ; ");
         final int intChoice = scannerHelperService.getNextIntUntilNumberEntered(
                 in, "Please enter one of these numbers. Choose your weapon Rock(0),Paper(1),Scissors(2) ; ");
-        final Optional<Choice> yourChoice = Choice.get(intChoice);
 
-        return yourChoice;
+        // When it is an invalid choice this method will return Optional empty
+        return Choice.get(intChoice);
     }
 }

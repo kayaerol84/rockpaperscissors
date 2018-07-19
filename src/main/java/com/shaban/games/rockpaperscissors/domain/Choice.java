@@ -1,5 +1,6 @@
 package com.shaban.games.rockpaperscissors.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -10,7 +11,7 @@ public enum Choice {
     ROCK(0){
 
         @Override
-        public boolean beats(Choice other){
+        public boolean beats(final Choice other){
             return other == SCISSORS;
 
         }
@@ -18,7 +19,7 @@ public enum Choice {
     PAPER(1){
 
         @Override
-        public boolean beats(Choice other){
+        public boolean beats(final Choice other){
             return other == ROCK;
 
         }
@@ -26,23 +27,22 @@ public enum Choice {
     SCISSORS (2) {
 
         @Override
-        public boolean beats(Choice other){
+        public boolean beats(final Choice other){
             return other == PAPER;
 
         }
     };
 
-    private static final Map<Integer, Choice> lookup = new HashMap<Integer, Choice>();
+    private static final Map<Integer, Choice> lookup = new HashMap<>();
 
     static {
-        for (Choice choice : Choice.values()) {
-            lookup.put(choice.getCode(), choice);
-        }
+        Arrays.stream(Choice.values())
+                .forEach(choice -> lookup.put(choice.getCode(), choice));
     }
 
     protected int code;
 
-    Choice(int code) {
+    Choice(final int code) {
         this.code = code;
     }
 
