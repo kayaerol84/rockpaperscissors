@@ -120,7 +120,7 @@ public class ChoiceServiceTest {
     }
 
     @Test
-    public void getChoice_shouldReturnROCK_when0Entered(){
+    public void getPersonChoice_shouldReturnROCK_when0Entered(){
 
         Scanner scanner = mock(Scanner.class);
         when(scannerHelperService.getNext(any())).thenReturn(ROCK.getCode());
@@ -131,7 +131,7 @@ public class ChoiceServiceTest {
     }
 
     @Test
-    public void getChoice_shouldReturnPAPER_when1Entered(){
+    public void getPersonChoice_shouldReturnPAPER_when1Entered(){
 
         Scanner scanner = mock(Scanner.class);
 
@@ -142,7 +142,7 @@ public class ChoiceServiceTest {
     }
 
     @Test
-    public void getChoice_shouldReturnSCISSORS_when2Entered(){
+    public void getPersonChoice_shouldReturnSCISSORS_when2Entered(){
 
         Scanner scanner = mock(Scanner.class);
         when(scannerHelperService.getNext(any())).thenReturn(SCISSORS.getCode());
@@ -153,7 +153,7 @@ public class ChoiceServiceTest {
     }
 
     @Test
-    public void getChoice_shouldReturnEmpty_when3Entered(){
+    public void getPersonChoice_shouldReturnEmpty_when3Entered(){
 
         Scanner scanner = mock(Scanner.class);
         when(scannerHelperService.getNext(any())).thenReturn("3");
@@ -163,7 +163,7 @@ public class ChoiceServiceTest {
     }
 
     @Test
-    public void getChoice_shouldReturnEmpty_whenAlphabeticEntered(){
+    public void getPersonChoice_shouldReturnEmpty_whenAlphabeticEntered(){
 
         Scanner scanner = mock(Scanner.class);
         when(scannerHelperService.getNext(any())).thenReturn("E");

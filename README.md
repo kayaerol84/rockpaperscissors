@@ -21,4 +21,3 @@ Here how you can play this game
         * <b style='color:green'>You won</b>
         * <b style='color:red'>Computer won</b>
         * <b style='color:yellow'>Nobody wins</b>
-
