@@ -19,7 +19,7 @@ public class RockPaperScissorsService {
     /**
      * returns the result of a single game and prints out who won
      * @param scanner
-     * @return
+     * @return Result
      */
     public Result playGame(Scanner scanner){
 

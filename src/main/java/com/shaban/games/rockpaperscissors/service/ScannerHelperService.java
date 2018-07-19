@@ -11,7 +11,7 @@ public class ScannerHelperService {
      * Keep prints <askIfAlphaEntered> until a number entered
      * @param scanner
      * @param askIfAlphaEntered
-     * @return
+     * @return int
      */
     public int getNextIntUntilNumberEntered(Scanner scanner, String askIfAlphaEntered) {
 
@@ -25,7 +25,7 @@ public class ScannerHelperService {
     /**
      * Implemented in order to improve testability & readability
      * @param scanner
-     * @return
+     * @return String
      */
     String getNext(Scanner scanner) {
         return scanner.next();

@@ -24,7 +24,7 @@ class ChoiceService {
      *
      * @param yourChoice
      * @param computerChoice
-     * @return
+     * @return Result
      */
     Result decideWhoWins(final Choice yourChoice, final Choice computerChoice) {
         // Outputs colored. Equal as yellow, computer wins as red & person wins as green
@@ -41,7 +41,7 @@ class ChoiceService {
 
     /**
      * returns computer's random choice
-     * @return
+     * @return Choice
      */
     Choice getComputerChoice() {
 
@@ -56,7 +56,7 @@ class ChoiceService {
     /**
      * returns person's choice. if an invalid choice entered, returns Optional.empty()
      * @param in
-     * @return
+     * @return Optional<Choice>
      */
     Optional<Choice> getPersonChoice(Scanner in) {
         System.out.print("Choose your weapon Rock(0),Paper(1),Scissors(2) ; ");
