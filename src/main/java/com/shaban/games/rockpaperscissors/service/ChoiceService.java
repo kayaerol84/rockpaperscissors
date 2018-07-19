@@ -16,10 +16,10 @@ class ChoiceService {
 
     void decideWhoWins(final Choice yourChoice, final Choice computerChoice) {
         if (yourChoice == computerChoice) {
-            System.out.println("Nobody wins, try again!");
+            System.out.println("\033[33;1;2m Nobody wins, try again!\033[0m");
         } else {
             boolean wins = yourChoice.beats(computerChoice);
-            System.out.println(wins ? "You won" : "Computer won");
+            System.out.println(wins ?  "\033[32;1;2m You won\033[0m" : "\033[31;1m Computer won\033[0m");
         }
 
     }
